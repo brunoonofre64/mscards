@@ -1,6 +1,6 @@
 package io.github.brunoonofre64.mscards.infra.repository;
 
-import io.github.brunoonofre64.mscards.domain.entitie.CardsEntity;
+import io.github.brunoonofre64.mscards.domain.entities.CardsEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

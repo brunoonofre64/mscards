@@ -1,12 +1,15 @@
 package io.github.brunoonofre64.mscards.infra.service;
 
+import io.github.brunoonofre64.mscards.domain.dto.CardsCustomerOutputDTO;
 import io.github.brunoonofre64.mscards.domain.dto.CardsInputDTO;
 import io.github.brunoonofre64.mscards.domain.dto.CardsOutputDTO;
-import io.github.brunoonofre64.mscards.domain.entitie.CardsEntity;
+import io.github.brunoonofre64.mscards.domain.entities.CardsCustomerEntity;
+import io.github.brunoonofre64.mscards.domain.entities.CardsEntity;
 import io.github.brunoonofre64.mscards.domain.enums.ErrorMessage;
 import io.github.brunoonofre64.mscards.domain.exception.BusinesRuleException;
 import io.github.brunoonofre64.mscards.domain.mapper.CardsMapper;
 import io.github.brunoonofre64.mscards.domain.service.CardsService;
+import io.github.brunoonofre64.mscards.infra.repository.CardsCustomerRepository;
 import io.github.brunoonofre64.mscards.infra.repository.CardsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,7 @@ import java.util.List;
 public class CardsServiceImpl implements CardsService {
 
     private final CardsRepository cardsRepository;
+    private final CardsCustomerRepository cardsCustomerRepository;
     private final CardsMapper mapper;
 
     @Override
@@ -46,5 +50,20 @@ public class CardsServiceImpl implements CardsService {
         }
 
         return mapper.mapperToOutputCardsList(cards);
+    }
+
+    @Override
+    public List<CardsCustomerOutputDTO> findCardsCustomerByCpf(String cpf) {
+        if (cpf == null) {
+            throw new BusinesRuleException(ErrorMessage.BUSINES_RULE);
+        }
+
+        List<CardsCustomerEntity> listCardsCustomer = cardsCustomerRepository.findByCpf(cpf);
+
+        if (CollectionUtils.isEmpty(listCardsCustomer)) {
+            throw new BusinesRuleException(ErrorMessage.BUSINES_RULE);
+        }
+
+        return mapper.mapperToOutputCardsCustomerList(listCardsCustomer);
     }
 }

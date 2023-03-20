@@ -1,8 +1,10 @@
 package io.github.brunoonofre64.mscards.infra.mapper;
 
+import io.github.brunoonofre64.mscards.domain.dto.CardsCustomerOutputDTO;
 import io.github.brunoonofre64.mscards.domain.dto.CardsInputDTO;
 import io.github.brunoonofre64.mscards.domain.dto.CardsOutputDTO;
-import io.github.brunoonofre64.mscards.domain.entitie.CardsEntity;
+import io.github.brunoonofre64.mscards.domain.entities.CardsCustomerEntity;
+import io.github.brunoonofre64.mscards.domain.entities.CardsEntity;
 import io.github.brunoonofre64.mscards.domain.enums.ErrorMessage;
 import io.github.brunoonofre64.mscards.domain.exception.BusinesRuleException;
 import io.github.brunoonofre64.mscards.domain.mapper.CardsMapper;
@@ -41,6 +43,31 @@ public class CardsMapperImpl implements CardsMapper {
                 .stream()
                 .map(this::mapperToCardsDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CardsCustomerOutputDTO> mapperToOutputCardsCustomerList(List<CardsCustomerEntity> cardsCustomer) {
+        if (CollectionUtils.isEmpty(cardsCustomer)) {
+            throw new BusinesRuleException(ErrorMessage.BUSINES_RULE);
+        }
+
+        return cardsCustomer
+                .stream()
+                .map(this::mapperToCardsCustomerDTO)
+                .collect(Collectors.toList());
+    }
+
+    private CardsCustomerOutputDTO mapperToCardsCustomerDTO(CardsCustomerEntity cardsCustomer) {
+        if (cardsCustomer == null) {
+            throw new BusinesRuleException(ErrorMessage.BUSINES_RULE);
+        }
+
+        return CardsCustomerOutputDTO
+                .builder()
+                .name(cardsCustomer.getCards().getName())
+                .flagCard(cardsCustomer.getCards().getFlagCard())
+                .cardLimit(cardsCustomer.getCardLimit())
+                .build();
     }
 
     private CardsOutputDTO mapperToCardsDTO(CardsEntity cards) {

@@ -1,4 +1,4 @@
-package io.github.brunoonofre64.mscards.domain.entitie;
+package io.github.brunoonofre64.mscards.domain.entities;
 
 import io.github.brunoonofre64.mscards.domain.enums.FlagCard;
 import lombok.*;
