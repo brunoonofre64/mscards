@@ -27,7 +27,7 @@ public class CardsMapperImpl implements CardsMapper {
         return CardsEntity
                 .builder()
                 .name(inputDTO.getName())
-                .flagCard(inputDTO.getFlagCard())
+                .cardFlag(inputDTO.getCardFlag())
                 .income(inputDTO.getIncome())
                 .basicLimit(inputDTO.getBasicLimit())
                 .build();
@@ -65,7 +65,7 @@ public class CardsMapperImpl implements CardsMapper {
         return CardsCustomerOutputDTO
                 .builder()
                 .name(cardsCustomer.getCards().getName())
-                .flagCard(cardsCustomer.getCards().getFlagCard())
+                .cardFlag(cardsCustomer.getCards().getCardFlag())
                 .cardLimit(cardsCustomer.getCardLimit())
                 .build();
     }
@@ -78,7 +78,7 @@ public class CardsMapperImpl implements CardsMapper {
         return CardsOutputDTO
                 .builder()
                 .name(cards.getName())
-                .flagCard(cards.getFlagCard())
+                .cardFlag(cards.getCardFlag())
                 .income(cards.getIncome())
                 .basicLimit(cards.getBasicLimit())
                 .build();

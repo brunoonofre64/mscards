@@ -1,6 +1,7 @@
 package io.github.brunoonofre64.mscards.domain.entities;
 
-import io.github.brunoonofre64.mscards.domain.enums.FlagCard;
+import io.github.brunoonofre64.mscards.domain.enums.CardFlag;
+import io.github.brunoonofre64.mscards.infra.adapter.CardFlagConverter;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,9 +23,9 @@ public class CardsEntity {
     @Column(nullable = false)
     private String name;
 
+    @Convert(converter = CardFlagConverter.class)
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private FlagCard flagCard;
+    private CardFlag cardFlag;
 
     @Column(nullable = false)
     private BigDecimal income;
