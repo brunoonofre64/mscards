@@ -1,6 +1,5 @@
 package io.github.brunoonofre64.mscards.domain.dto;
 
-import io.github.brunoonofre64.mscards.domain.enums.CardFlag;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -12,6 +11,6 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class CardsCustomerOutputDTO {
     private String name;
-    private CardFlag cardFlag;
+    private String cardFlag;
     private BigDecimal cardLimit;
 }

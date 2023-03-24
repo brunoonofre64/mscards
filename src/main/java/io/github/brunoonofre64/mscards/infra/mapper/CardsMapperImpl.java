@@ -19,7 +19,7 @@ public class CardsMapperImpl implements CardsMapper {
 
 
     @Override
-    public CardsEntity mapperToEntity(CardsInputDTO inputDTO) {
+    public CardsEntity mapToEntity(CardsInputDTO inputDTO) {
         if (inputDTO == null) {
             throw new BusinesRuleException(ErrorMessage.BUSINES_RULE);
         }
@@ -34,30 +34,30 @@ public class CardsMapperImpl implements CardsMapper {
     }
 
     @Override
-    public List<CardsOutputDTO> mapperToOutputCardsList(List<CardsEntity> cards) {
+    public List<CardsOutputDTO> mapToOutputCardsList(List<CardsEntity> cards) {
         if (CollectionUtils.isEmpty(cards)) {
             throw new BusinesRuleException(ErrorMessage.BUSINES_RULE);
         }
 
         return cards
                 .stream()
-                .map(this::mapperToCardsDTO)
+                .map(this::mapToCardsDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<CardsCustomerOutputDTO> mapperToOutputCardsCustomerList(List<CardsCustomerEntity> cardsCustomer) {
+    public List<CardsCustomerOutputDTO> mapToOutputCardsCustomerList(List<CardsCustomerEntity> cardsCustomer) {
         if (CollectionUtils.isEmpty(cardsCustomer)) {
             throw new BusinesRuleException(ErrorMessage.BUSINES_RULE);
         }
 
         return cardsCustomer
                 .stream()
-                .map(this::mapperToCardsCustomerDTO)
+                .map(this::mapToCardsCustomerDTO)
                 .collect(Collectors.toList());
     }
 
-    private CardsCustomerOutputDTO mapperToCardsCustomerDTO(CardsCustomerEntity cardsCustomer) {
+    private CardsCustomerOutputDTO mapToCardsCustomerDTO(CardsCustomerEntity cardsCustomer) {
         if (cardsCustomer == null) {
             throw new BusinesRuleException(ErrorMessage.BUSINES_RULE);
         }
@@ -65,12 +65,12 @@ public class CardsMapperImpl implements CardsMapper {
         return CardsCustomerOutputDTO
                 .builder()
                 .name(cardsCustomer.getCards().getName())
-                .cardFlag(cardsCustomer.getCards().getCardFlag())
+                .cardFlag(cardsCustomer.getCards().getCardFlag().name())
                 .cardLimit(cardsCustomer.getCardLimit())
                 .build();
     }
 
-    private CardsOutputDTO mapperToCardsDTO(CardsEntity cards) {
+    private CardsOutputDTO mapToCardsDTO(CardsEntity cards) {
         if (cards == null) {
             throw new BusinesRuleException(ErrorMessage.BUSINES_RULE);
         }
@@ -78,7 +78,7 @@ public class CardsMapperImpl implements CardsMapper {
         return CardsOutputDTO
                 .builder()
                 .name(cards.getName())
-                .cardFlag(cards.getCardFlag())
+                .cardFlag(cards.getCardFlag().name())
                 .income(cards.getIncome())
                 .basicLimit(cards.getBasicLimit())
                 .build();

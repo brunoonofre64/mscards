@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -32,7 +33,7 @@ public class CardsServiceImpl implements CardsService {
             throw new BusinesRuleException(ErrorMessage.BUSINES_RULE);
         }
 
-        CardsEntity card = mapper.mapperToEntity(cardsInputDTO);
+        CardsEntity card = mapper.mapToEntity(cardsInputDTO);
         cardsRepository.save(card);
     }
 
@@ -46,10 +47,10 @@ public class CardsServiceImpl implements CardsService {
         List<CardsEntity> cards = cardsRepository.findByIncomeLessThanEqual(incomeBigDecimal);
 
         if (CollectionUtils.isEmpty(cards)) {
-            throw new BusinesRuleException(ErrorMessage.BUSINES_RULE);
+            return Collections.emptyList();
         }
 
-        return mapper.mapperToOutputCardsList(cards);
+        return mapper.mapToOutputCardsList(cards);
     }
 
     @Override
@@ -61,9 +62,9 @@ public class CardsServiceImpl implements CardsService {
         List<CardsCustomerEntity> listCardsCustomer = cardsCustomerRepository.findByCpf(cpf);
 
         if (CollectionUtils.isEmpty(listCardsCustomer)) {
-            throw new BusinesRuleException(ErrorMessage.BUSINES_RULE);
+            return Collections.emptyList();
         }
 
-        return mapper.mapperToOutputCardsCustomerList(listCardsCustomer);
+        return mapper.mapToOutputCardsCustomerList(listCardsCustomer);
     }
 }

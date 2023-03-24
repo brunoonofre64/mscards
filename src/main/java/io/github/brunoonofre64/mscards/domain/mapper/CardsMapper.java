@@ -9,7 +9,7 @@ import io.github.brunoonofre64.mscards.domain.entities.CardsEntity;
 import java.util.List;
 
 public interface CardsMapper {
-    CardsEntity mapperToEntity(CardsInputDTO inputDTO);
-    List<CardsOutputDTO> mapperToOutputCardsList(List<CardsEntity> cards);
-    List<CardsCustomerOutputDTO> mapperToOutputCardsCustomerList(List<CardsCustomerEntity> cardsCustomer);
+    CardsEntity mapToEntity(CardsInputDTO inputDTO);
+    List<CardsOutputDTO> mapToOutputCardsList(List<CardsEntity> cards);
+    List<CardsCustomerOutputDTO> mapToOutputCardsCustomerList(List<CardsCustomerEntity> cardsCustomer);
 }
